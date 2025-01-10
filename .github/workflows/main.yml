@@ -11,6 +11,12 @@ jobs:
       run: Invoke-WebRequest https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-windows-amd64.msi -OutFile cloudflared.msi
     - name: 安装 Cloudflared
       run: cmd /c "msiexec /i cloudflared.msi /qn"
+    - name: 测试1。。。
+      run: 'ls -la "C:\Program Files (x86)\"'
+    - name: 测试2。。。
+      run: 'ls -la "C:\Program Files\"'
+    - name: 测试3。。。
+      run: 'ls -la "C:\Program Files\cloudflared\"'
     - name: 设置并启动 Cloudflared 服务
       run: '& "C:\Program Files\cloudflared\cloudflared.exe" service install $Env:CLOUDFLARE_TOKEN'
       env:
