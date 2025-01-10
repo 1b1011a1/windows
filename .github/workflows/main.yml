@@ -15,7 +15,7 @@ jobs:
       run: |
         $executablePath = [System.IO.Path]::GetFullPath("cloudflared")
         $escapedExecutablePath = "`"$executablePath`""
-        $serviceInstallPart = "service install `"$(${{ secrets.CLOUDFLARE_TOKEN }})`""
+        $serviceInstallPart = "service install `"$($env:CLOUDFLARE_TOKEN)`""
         $cmd = "cmd /c $escapedExecutablePath $serviceInstallPart"
         Invoke-Expression $cmd
       env:
