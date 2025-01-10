@@ -13,7 +13,7 @@ jobs:
       run: cmd /c "msiexec /i cloudflared.msi /qn"
     - name: Auth and Install Service
       run: |
-        $executablePath = [System.IO.Path]::GetFullPath("cloudflared")
+        $executablePath = "cloudflared"
         $escapedExecutablePath = "`"$executablePath`""
         $serviceInstallPart = "service install `"$($env:CLOUDFLARE_TOKEN)`""
         $cmd = "cmd /c $escapedExecutablePath $serviceInstallPart"
