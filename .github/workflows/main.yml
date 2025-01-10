@@ -12,10 +12,7 @@ jobs:
     - name: Install Cloudflared
       run: cmd /c "msiexec /i cloudflared.msi /qn"
     - name: Auth and Install Service
-      run: |
-        $executablePath = "cloudflared"
-        $command = "cmd /c `"$executablePath`" service install `"$(${{ secrets.CLOUDFLARE_TOKEN }})`""
-        Invoke-Expression $command
+      run: cmd /c "$executablePath service install %CLOUDFLARE_TOKEN%"
       env:
         CLOUDFLARE_TOKEN: ${{ secrets.CLOUDFLARE_TOKEN }}
     - name: Enable TS
