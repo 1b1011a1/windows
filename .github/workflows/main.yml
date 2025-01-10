@@ -15,7 +15,7 @@ jobs:
       run: $env:CLOUDFLARED_PATH = "C:\Program Files\cloudflared\cloudflared.exe"
     - name: Auth and Install Service
       run: |
-        $executablePath = `"$env:CLOUDFLARED_PATH`"
+        $executablePath = `"C:\Program Files\cloudflared\cloudflared.exe`"
         $command = "cmd /c `"$executablePath`" service install `"$(${{ secrets.CLOUDFLARE_TOKEN }})`""
         Invoke-Expression $command
       env:
