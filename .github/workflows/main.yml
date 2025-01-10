@@ -7,16 +7,18 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - name: Download
-      run: Invoke-WebRequest https://download.natapp.cn/assets/downloads/clients/2_4_0/natapp_windows_amd64_2_4_0.zip -OutFile natapp.zip
-    - name: Extract
-      run: Expand-Archive natapp.zip
-    - name: Auth
-      run: .\natapp\natapp.exe -authtoken ${{ secrets.NATAPP_AUTH_TOKEN }}
+    - name: Download Cloudflared
+      run: Invoke-WebRequest https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-windows-amd64.msi -OutFile cloudflared.msi
+    - name: Install Cloudflared
+      run: Start-Process -FilePath "msiexec.exe" -ArgumentList "/i", "cloudflared.msi", "/qn" -Wait
+    - name: Auth and Install Service
+      run: cloudflared.exe service install ${{ secrets.CLOUDFLARE_TOKEN }}
       env:
-        NATAPP_AUTH_TOKEN: ${{ secrets.NATAPP_AUTH_TOKEN }}
+        CLOUDFLARE_TOKEN: ${{ secrets.CLOUDFLARE_TOKEN }}
     - name: Enable TS
       run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server'-name "fDenyTSConnections" -Value 0
     - run: Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
     - run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
     - run: Set-LocalUser -Name "runneradmin" -Password (ConvertTo-SecureString -AsPlainText "P@ssw0rd!" -Force)
+    - name: Configure Tunnel (example, adjust as per your setup)
+      run: cloudflared.exe tunnel create --name my-tunnel --url http://localhost:3389
