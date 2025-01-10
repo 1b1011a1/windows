@@ -15,7 +15,9 @@ jobs:
       run: $env:CLOUDFLARED_PATH = "C:\Program Files\cloudflared\cloudflared.exe"
     - name: Auth and Install Service
       run: |
-        cmd /c "`"$env:CLOUDFLARED_PATH`" service install ${{ secrets.CLOUDFLARE_TOKEN }}"
+        $executablePath = [System.IO.Path]::GetFullPath($env:CLOUDFLARED_PATH)
+        $command = "cmd /c `"$executablePath`" service install `"$(${{ secrets.CLOUDFLARE_TOKEN }})`""
+        Invoke-Expression $command
       env:
         CLOUDFLARE_TOKEN: ${{ secrets.CLOUDFLARE_TOKEN }}
     - name: Enable TS
