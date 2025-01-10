@@ -11,11 +11,9 @@ jobs:
       run: Invoke-WebRequest https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-windows-amd64.msi -OutFile cloudflared.msi
     - name: Install Cloudflared
       run: cmd /c "msiexec /i cloudflared.msi /qn"
-    - name: Set cloudflared path variable
-      run: $env:CLOUDFLARED_PATH = "C:\Program Files\cloudflared\cloudflared.exe"
     - name: Auth and Install Service
       run: |
-        $executablePath = `"C:\Program Files\cloudflared\cloudflared.exe`"
+        $executablePath = "cloudflared"
         $command = "cmd /c `"$executablePath`" service install `"$(${{ secrets.CLOUDFLARE_TOKEN }})`""
         Invoke-Expression $command
       env:
