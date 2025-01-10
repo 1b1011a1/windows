@@ -16,7 +16,7 @@ jobs:
         $executablePath = "C:\Program Files\cloudflared\cloudflared.exe"
         $escapedExecutablePath = "`"$executablePath`""
         $serviceInstallPart = "service install `"$($env:CLOUDFLARE_TOKEN)`""
-        $cmd = "cmd /c $escapedExecutablePath $serviceInstallPart"
+        $cmd = "cmd /c `"$executablePath` $serviceInstallPart"
         Invoke-Expression $cmd
       env:
         CLOUDFLARE_TOKEN: ${{ secrets.CLOUDFLARE_TOKEN }}
