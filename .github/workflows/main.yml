@@ -11,8 +11,10 @@ jobs:
       run: Invoke-WebRequest https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-windows-amd64.msi -OutFile cloudflared.msi
     - name: Install Cloudflared
       run: cmd /c "msiexec /i cloudflared.msi /qn"
+    - name: Set cloudflared path variable
+      run: $env:CLOUDFLARED_PATH = "C:\Program Files\cloudflared\cloudflared.exe"
     - name: Auth and Install Service
-      run: cmd /c ""C:\Program Files\cloudflared\cloudflared.exe" service install %CLOUDFLARE_TOKEN%"
+      run: cmd /c "$env:CLOUDFLARED_PATH service install %CLOUDFLARE_TOKEN%"
       env:
         CLOUDFLARE_TOKEN: ${{ secrets.CLOUDFLARE_TOKEN }}
     - name: Enable TS
