@@ -17,7 +17,7 @@ jobs:
     - name: 安装
       run: cmd /c "msiexec /i C:\A.msi /qn"
     - name: 登录
-      run: '& "C:\Program Files\cpolar\cpolar.exe" authtoken  $Env:CPLAR_TOKEN'
+      run: '& "C:\Program Files\cpolar\cpolar.exe" authtoken $Env:CPLAR_TOKEN'
       env:
         NGROK_AUTH_TOKEN: ${{ secrets.CPLAR_TOKEN }}
     - name: 启用远程桌面
