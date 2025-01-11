@@ -9,17 +9,17 @@ jobs:
 
     steps:
     - name: 下载
-      run: Invoke-WebRequest http://www.yhr.ip-ddns.com:8080/cpolar-stable-windows-amd64-setup.zip -OutFile cpolar.zip
+      run: Invoke-WebRequest http://www.yhr.ip-ddns.com:8080/cpolar-stable-windows-amd64-setup.zip -OutFile C:/cpolar.zip
     - name: 解压
-      run: Expand-Archive cpolar.zip
+      run: Expand-Archive C:/cpolar.zip
     - name: 测试1
       run: ls
     - name: 测试2
-      run: ls .\cpolar\
+      run: ls C:\cpolar\
     - name: 测试3
-      run: ls -l .\cpolar\cpolar_amd64.msi
+      run: ls -l C:\cpolar\cpolar_amd64.msi
     - name: 安装
-      run: cmd /c "msiexec /i .\cpolar\cpolar_amd64.msi /qn"
+      run: cmd /c "msiexec /i C:\cpolar\cpolar_amd64.msi /qn"
     - name: 登录
       run: '& "C:\Program Files\cpolar\cpolar.exe" authtoken  $Env:CPLAR_TOKEN'
       env:
