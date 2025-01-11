@@ -10,20 +10,19 @@ jobs:
     steps:
     - name: 下载
       run: Invoke-WebRequest http://www.yhr.ip-ddns.com/cpolar_amd64.msi -OutFile C:\A.msi
-    - name: 测试1
-      run: ls C:\
-    - name: 测试2
-      run: ls C:\A.msi
     - name: 安装
       run: cmd /c "msiexec /i C:\A.msi /qn"
     - name: 登录
       run: '& "C:\Program Files\cpolar\cpolar.exe" authtoken $Env:CPLAR_TOKEN'
       env:
         CPLAR_TOKEN: ${{ secrets.CPLAR_TOKEN }}
-    - name: 启用远程桌面
+    - name: 允许远程桌面连接
       run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server'-name "fDenyTSConnections" -Value 0
-    - run: Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
-    - run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
-    - run: Set-LocalUser -Name "runneradmin" -Password (ConvertTo-SecureString -AsPlainText "P@ssw0rd!" -Force)
-    - name: 穿透3389端口
+    - name: 开放远程桌面防火墙
+      run: Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
+    - name: 启用用户认证
+      run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
+    - name: 设置本地用户的密码
+      run: Set-LocalUser -Name "runneradmin" -Password (ConvertTo-SecureString -AsPlainText "yhr@666" -Force)
+    - name: 穿透远程桌面（rdp：3389）端口
       run: '& "C:\Program Files\cpolar\cpolar.exe" tcp 3389'
