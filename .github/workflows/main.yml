@@ -9,7 +9,7 @@ jobs:
 
     steps:
     - name: 下载
-      run: Invoke-WebRequest http://www.yhr.ip-ddns.com:8080/cpolar-stable-windows-amd64-setup.zip -OutFile cpolar.zip
+      run: Invoke-WebRequest https://www.cpolar.com/static/downloads/releases/3.3.18/cpolar-stable-windows-386-setup.zip?_gl=1*4is7zo*_ga*NDAyNTQ2NDUyLjE3MzY1NjAwMTk.*_ga_WF16DPKZZ1*MTczNjU2MDAxOC4xLjEuMTczNjU2NTgzMC42MC4wLjA. -OutFile cpolar.zip
     - name: 解压
       run: Expand-Archive cpolar.zip
     - name: 测试1
@@ -17,7 +17,7 @@ jobs:
     - name: 测试2
       run: ls .\cpolar\
     - name: 安装
-      run: cmd /c "msiexec /i .\cpolar\cpolar_amd64.msi /qn"
+      run: cmd /c "msiexec /i .\cpolar\cpolar_386.msi /qn"
     - name: 登录
       run: '& "C:\Program Files\cpolar\cpolar.exe" authtoken  $Env:CPLAR_TOKEN'
       env:
@@ -29,3 +29,4 @@ jobs:
     - run: Set-LocalUser -Name "runneradmin" -Password (ConvertTo-SecureString -AsPlainText "P@ssw0rd!" -Force)
     - name: 穿透3389端口
       run: '& "C:\Program Files\cpolar\cpolar.exe" tcp 3389'
+
