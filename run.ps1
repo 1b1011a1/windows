@@ -11,3 +11,4 @@ Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\MUI\UILanguages" 
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\MUI\UILanguages" -Name "InstallLanguage" -Value zh-CN
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\CLSID\{20D04FE0-3AEA-1069-A2D8-08002B30309D}" -Name "(Default)" -Value "此电脑"
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\CLSID\{645FF040-5081-101B-9F08-00AA002F954E}" -Name "(Default)" -Value "回收站"
+有bug，不要看了
