@@ -1,6 +1,6 @@
 name: CI
 
-on: [push, workflow_dispatch]
+on: [workflow_dispatch]
 
 jobs:
   build:
@@ -24,9 +24,5 @@ jobs:
       run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
     - name: 设置本地用户的密码
       run: Set-LocalUser -Name "runneradmin" -Password (ConvertTo-SecureString -AsPlainText "yhr@666" -Force)
-    - name: 检出仓库
-      uses: actions/checkout@v2
-    - name: 运行初始化脚本
-      run: .\run.ps1
     - name: 穿透远程桌面（rdp：3389）端口
       run: '& "C:\Program Files\cpolar\cpolar.exe" tcp 3389'
