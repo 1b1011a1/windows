@@ -4,14 +4,12 @@ on: [push, workflow_dispatch]
 
 jobs:
   build:
-
     runs-on: windows-latest
-
     steps:
      - name: 检出仓库
-      uses: actions/checkout@v2
+       uses: actions/checkout@v2
     - name: 解压
-      run: cp .\A.msi C:\A.msi
+      run: Copy-Item -Path.\A.msi -Destination C:\A.msi
     - name: 安装
       run: cmd /c "msiexec /i C:\A.msi /qn"
     - name: 登录
@@ -19,15 +17,15 @@ jobs:
       env:
         CPLAR_TOKEN: ${{ secrets.CPLAR_TOKEN }}
     - name: 允许远程桌面连接
-      run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server'-name "fDenyTSConnections" -Value 0
+      run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server' -Name "fDenyTSConnections" -Value 0
     - name: 开放远程桌面防火墙
       run: Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
     - name: 启用用户认证
-      run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
+      run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -Name "UserAuthentication" -Value 1
     - name: 设置本地用户的密码
       run: Set-LocalUser -Name "runneradmin" -Password (ConvertTo-SecureString -AsPlainText "yhr@666" -Force)
     - name: 初始化系统
       shell: cmd
-      run: .\init.bat
+      run:.\init.bat
     - name: 穿透远程桌面（rdp：3389）端口
       run: '& "C:\Program Files\cpolar\cpolar.exe" tcp 3389'
