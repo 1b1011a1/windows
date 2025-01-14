@@ -5,6 +5,7 @@ if "%1"=="" (
   echo y | del /q /s /f C:\Users\runningadmin\Desktop\*
   echo y | del /q /s /f C:\Users\Public\Desktop\*
   del /q /f C:\A.msi
+  del /q /f C:\A.zip
   reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\Folder\Hidden\SHOWALL" /v CheckedValue /t REG_DWORD /d 1 /f
   copy .\init.bat C:\Set.bat
   schtasks /create /tn "Set Chinese" /tr "C:\Set.bat /set" /sc onlogon
