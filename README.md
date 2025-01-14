@@ -22,4 +22,5 @@
 6. Name 填 CPLAR_TOKEN ， Secret填把刚刚复制的字符串，然后保存.
 7. 清空README.md文件并提交.
 8. 打开[cpolar](https://dashboard.cpolar.com/status)查看远程地址.
-   
+
+![效果图1](images/1.png)
