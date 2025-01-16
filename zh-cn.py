@@ -5,6 +5,7 @@ import numpy as np
 from PIL import ImageGrab
 from pywinauto.application import Application
 import pyautogui
+import subprocess
 
 def open_uri(uri):
     ShellExecute = ctypes.windll.shell32.ShellExecuteW
@@ -42,6 +43,10 @@ def scroll_down(scroll_amount=1):
 def type_text(text):
     pyautogui.write(text, interval=0.1)
 
+def logoff_current_user():
+    flags = 0x00000000 | 0x00000004 | 0x00000010
+    ctypes.windll.user32.ExitWindowsEx(flags, 0)
+
 if __name__ == "__main__":
     open_uri("ms-settings:time-language")
     time.sleep(1)
@@ -61,3 +66,11 @@ if __name__ == "__main__":
     result = False
     while not result:
         result = find_and_click_target_image('C:\7.png')
+    command1 = '"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "Set-WinUserLanguageList -LanguageList ( New-WinUserLanguageList zh-CN ) -Force"'
+    command2 = '"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "Set-WinUILanguageOverride -Language zh-CN"'
+    try:
+        subprocess.run(command1, shell=True, check=True)
+        subprocess.run(command2, shell=True, check=True)
+    except subprocess.CalledProcessError as e:
+        print(f"{e}")
+    logoff_current_user()
