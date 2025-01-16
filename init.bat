@@ -25,7 +25,5 @@ if "%1"=="" (
       reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v ShowTaskViewButton /t REG_DWORD /d 0 /f
       "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -Command "Set-WinUserLanguageList -LanguageList ( New-WinUserLanguageList zh-CN ) -Force"
       "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -Command "Set-WinUILanguageOverride -Language zh-CN"
-    )else if "%1"=="/init" (
-      
     )
 )
