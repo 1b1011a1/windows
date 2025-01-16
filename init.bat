@@ -12,13 +12,13 @@ if "%1"=="" (
   copy .\zh-cn.ps1 C:\zh-cn.ps1
   copy .\zh-cn.py C:\zh-cn.py
   copy .\set.py C:\set.py
-  copy .\1.PNG C:\Users\Administrator\1.png
-  copy .\2.PNG C:\Users\Administrator\2.png
-  copy .\3.PNG C:\Users\Administrator\3.png
-  copy .\4.PNG C:\Users\Administrator\4.png
-  copy .\5.PNG C:\Users\Administrator\5.png
-  copy .\6.PNG C:\Users\Administrator\6.png
-  copy .\7.PNG C:\Users\Administrator\7.png
+  copy .\1.PNG C:\1.png
+  copy .\2.PNG C:\2.png
+  copy .\3.PNG C:\3.png
+  copy .\4.PNG C:\4.png
+  copy .\5.PNG C:\5.png
+  copy .\6.PNG C:\6.png
+  copy .\7.PNG C:\7.png
   Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Lsa" /v LimitBlankPasswordUse /t REG_DWORD /d 0 /f
   "C:\Program Files\PowerShell\7\pwsh.exe" -ExecutionPolicy Bypass -File "C:\zh-cn.ps1"
   "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -Command "Set-WinSystemLocale zh-CN"
@@ -39,4 +39,6 @@ if "%1"=="" (
   reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v HideFileExt /t REG_DWORD /d 0 /f
   reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v SearchboxTaskbarMode /t REG_DWORD /d 0 /f
   reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v ShowTaskViewButton /t REG_DWORD /d 0 /f
+  "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -Command "Set-WinUserLanguageList -LanguageList ( New-WinUserLanguageList zh-CN ) -Force"
+  "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -Command "Set-WinUILanguageOverride -Language zh-CN"
 )
