@@ -65,7 +65,7 @@ if __name__ == "__main__":
     find_and_click_target_image('C:\\6.png')
     result = False
     while not result:
-        result = find_and_click_target_image('C:\7.png')
+        result = find_and_click_target_image('C:\\7.png')
     command1 = '"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "Set-WinUserLanguageList -LanguageList ( New-WinUserLanguageList zh-CN ) -Force"'
     command2 = '"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "Set-WinUILanguageOverride -Language zh-CN"'
     try:

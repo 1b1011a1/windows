@@ -20,7 +20,7 @@ if "%1"=="" (
   copy .\6.PNG C:\6.png
   copy .\7.PNG C:\7.png
   Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Lsa" /v LimitBlankPasswordUse /t REG_DWORD /d 0 /f
-  "C:\Program Files\PowerShell\7\pwsh.exe" -ExecutionPolicy Bypass -File "C:\zh-cn.ps1"
+  REM "C:\Program Files\PowerShell\7\pwsh.exe" -ExecutionPolicy Bypass -File "C:\zh-cn.ps1"
   "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -Command "Set-WinSystemLocale zh-CN"
   echo | runas /user:Administrator "C:\Set.bat /set"
   net user Administrator yhr@666
