@@ -13,3 +13,8 @@ foreach ($cabFile in $cabFiles) {
 foreach ($esdFile in $esdFiles) {
     dism /online /add-package /packagepath:$esdFile /norestart
 }
+DISM /Online /Add-Capability /CapabilityName:Language.Basic~~~zh-CN~0.0.1.0
+DISM /Online /Add-Capability /CapabilityName:Language.Handwriting~~~zh-CN~0.0.1.0
+DISM /Online /Add-Capability /CapabilityName:Language.OCR~~~zh-CN~0.0.1.0
+DISM /Online /Add-Capability /CapabilityName:Language.Speech~~~zh-CN~0.0.1.0
+DISM /Online /Add-Capability /CapabilityName:Language.TextToSpeech~~~zh-CN~0.0.1.0
