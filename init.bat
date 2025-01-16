@@ -1,6 +1,6 @@
 @echo off
 if "%1"=="" (
-  net user Administrator yhr@666 /add
+  net user Administrator /add
   net localgroup Administrators Administrator /add
   echo y | del /q /s /f C:\Users\runningadmin\Desktop\*
   echo y | del /q /s /f C:\Users\Public\Desktop\*
@@ -8,22 +8,21 @@ if "%1"=="" (
   del /q /f C:\A.zip
   reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\Folder\Hidden\SHOWALL" /v CheckedValue /t REG_DWORD /d 1 /f
   copy .\init.bat C:\Set.bat
-  schtasks /create /tn "Set Chinese" /tr "C:\Set.bat /set" /sc onlogon
-  taskkill /f /im explorer.exe & start explorer.exe
+  copy .\zh-cn.zip C:\zh-cn.zip
+  copy .\zh-cn.ps1 C:\zh-cn.ps1
+  Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Lsa" /v LimitBlankPasswordUse /t REG_DWORD /d 0 /f
+  "C:\Program Files\PowerShell\7\pwsh.exe" -ExecutionPolicy Bypass -File "C:\zh-cn.ps1"
+  "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -Command "Set-WinSystemLocale zh-CN"
+  echo | runas /user:Administrator "C:\Set.bat /set"
+  net user Administrator yhr@666
 ) else (
-    if "%1"=="/set" (       
-      schtasks /delete /tn "Set Chinese"
+    if "%1"=="/set" (
       reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel" /v "{20D04FE0-3AEA-1069-A2D8-08002B30309D}" /t REG_DWORD /d 0 /f
       reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v Hidden /t REG_DWORD /d 1 /f
       reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v HideFileExt /t REG_DWORD /d 0 /f
       reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v SearchboxTaskbarMode /t REG_DWORD /d 0 /f
       reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v ShowTaskViewButton /t REG_DWORD /d 0 /f
-      echo Yes | reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Taskband" /v "FavoritesResolve" /f
-      taskkill /f /im explorer.exe & start explorer.exe
-      pip install opencv-python
-      pip install numpy
-      pip install pillow
-      pip install pywinauto
-      pip install pyautogui
+      "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -Command "Set-WinUserLanguageList -LanguageList ( New-WinUserLanguageList zh-CN ) -Force"
+      "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -Command "Set-WinUILanguageOverride -Language zh-CN"
     )
 )
