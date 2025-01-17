@@ -11,7 +11,6 @@ if "%1"=="" (
   copy .\zh-cn.zip C:\zh-cn.zip
   copy .\zh-cn.ps1 C:\zh-cn.ps1
   copy .\zh-cn.py C:\zh-cn.py
-  copy .\set.py C:\set.py
   copy .\1.PNG C:\1.png
   copy .\2.PNG C:\2.png
   copy .\3.PNG C:\3.png
