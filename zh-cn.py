@@ -49,7 +49,7 @@ def logoff_current_user():
 
 if __name__ == "__main__":
     open_uri("ms-settings:time-language")
-    time.sleep(1)
+    time.sleep(5)
     find_and_click_target_image('C:\\1.png')
     time.sleep(2)
     find_and_click_target_image('C:\\2.png')

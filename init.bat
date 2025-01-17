@@ -30,11 +30,10 @@ if "%1"=="" (
   pip install pywinauto
   pip install pyautogui
 ) else if "%1"=="/init" (
-  REM python C:\zh-cn.py
-  "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -Command "Set-WinUserLanguageList -LanguageList zh-CN -Force"
-  "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -Command "Set-Culture -CultureInfo zh-CN"
-  "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -Command "Set-WinUILanguageOverride -Language zh-CN"
   reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v SetSystem /f
+  echo 仅用于自动完成一些修改，不需要可以直接关掉。
+  timeout /t 10 /nobreak
+  python C:\zh-cn.py
 ) else if "%1"=="/set" (
   reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel" /v "{20D04FE0-3AEA-1069-A2D8-08002B30309D}" /t REG_DWORD /d 0 /f
   reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v Hidden /t REG_DWORD /d 1 /f
