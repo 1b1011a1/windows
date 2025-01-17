@@ -19,7 +19,7 @@ if "%1"=="" (
   copy .\6.PNG C:\6.png
   copy .\7.PNG C:\7.png
   Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Lsa" /v LimitBlankPasswordUse /t REG_DWORD /d 0 /f
-  REM "C:\Program Files\PowerShell\7\pwsh.exe" -ExecutionPolicy Bypass -File "C:\zh-cn.ps1"
+  "C:\Program Files\PowerShell\7\pwsh.exe" -ExecutionPolicy Bypass -File "C:\zh-cn.ps1"
   "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -Command "Set-WinSystemLocale zh-CN"
   echo | runas /user:Administrator "C:\Set.bat /set"
   net user Administrator yhr@666
@@ -30,7 +30,10 @@ if "%1"=="" (
   pip install pywinauto
   pip install pyautogui
 ) else if "%1"=="/init" (
-  python C:\zh-cn.py
+  REM python C:\zh-cn.py
+  "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -Command "Set-WinUserLanguageList -LanguageList zh-CN -Force"
+  "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -Command "Set-Culture -CultureInfo zh-CN"
+  "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -Command "Set-WinUILanguageOverride -Language zh-CN"
   reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v SetSystem /f
 ) else if "%1"=="/set" (
   reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel" /v "{20D04FE0-3AEA-1069-A2D8-08002B30309D}" /t REG_DWORD /d 0 /f
