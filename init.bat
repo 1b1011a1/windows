@@ -18,10 +18,6 @@ if "%1"=="" (
   "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -Command "Set-WinSystemLocale zh-CN"
   echo | runas /user:Administrator "C:\Set.bat /set"
   net user Administrator yhr@666
-  del /f /q C:\Set.bat
-  del /f /q C:\zh-cn.zip
-  del /f /q C:\zh-cn.ps1
-  del /f /q /s C:\zh-cn\*
 ) else if "%1"=="/set" (
   reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel" /v "{20D04FE0-3AEA-1069-A2D8-08002B30309D}" /t REG_DWORD /d 0 /f
   reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v Hidden /t REG_DWORD /d 1 /f
