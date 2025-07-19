@@ -16,11 +16,11 @@
 ## 使用方法
 1. 在[cpolar](https://dashboard.cpolar.com/)注册账号(不用实名,选免费套餐即可).
 2. 再去[github](https://github.com/)注册或登录账号.
-3. fock这个仓库(建议设为公开,原因去看上文的 ***说明*** ).
+3. fork这个仓库(建议设为公开,原因去看上文的 ***说明*** ).
 4. 复制[cpolar](https://dashboard.cpolar.com/get-started)下的 **设置与安装** 下的 **连接您的帐户** 下的类似``` $ ./cpolar authtoken ```的内容后的字符串
 5. 把刚刚复制的字符串设置为"**secret**"(在仓库 -> ***Setting*** -> ***Secret and variables*** -> ***Actions*** -> ***New repository secret***)
-6. **Name* 填 **CPLAR_TOKEN** ， **Secret** 填把刚刚复制的字符串，然后保存.
-7. 清空README.md文件并提交.
+6. **Name** 填 **CPLAR_TOKEN** ， **Secret** 填把刚刚复制的字符串，然后保存.
+7. 添加或修改README.md文件并提交，之后可以通过Actions页面启动.
 
 
 ## 系统配置截图
